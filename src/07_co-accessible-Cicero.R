@@ -40,17 +40,17 @@ message("INFO : Loading dataset ...")
 seurat=readRDS(args$seurat)
 
 message("INFO : as.cell_data_set  ...")
-seurat.cds <- as.cell_data_set(x = seurat,assay="ATAC")
+assayNames=c("ATAC","peaks")
+assayName=assayNames[assayNames%in%names(seurat@assays)]
+seurat.cds <- as.cell_data_set(x = seurat,assay=assayName)
 
 message("INFO : Convert into Cicero Object ...")
 seurat.cicero <- make_cicero_cds(seurat.cds, reduced_coordinates = reducedDims(seurat.cds)$UMAP)
 
 message("INFO : get the chromosome sizes from the Seurat object ...")
-genome <- seqlengths(seurat)
+keepChr=paste("chr",c(1:22,"X","Y"),sep="")
+genome <- seqlengths(seurat)[keepChr]
 
-# use chromosome 1 to save some time
-# omit this step to run on the whole genome
-#genome <- genome[1]
 
 message("INFO : convert chromosome sizes to a dataframe ...")
 genome.df <- data.frame("chr" = names(genome), "length" = genome)
@@ -69,3 +69,4 @@ Links(seurat) <- links
 
 message("INFO : Save Object ...")
 saveRDS(seurat,file.path(outDir,"seurat-cis-links.rds"))
+message("INFO : Done!")
