@@ -1,0 +1,3 @@
+MSCE-24h-1-RNA /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output//MSCE-24h-1-RNA/seurat.rds
+MSCE-3h-1-RNA /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output//MSCE-3h-1-RNA/seurat.rds
+MSCE-72h-1-RNA /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output//MSCE-72h-1-RNA/seurat.rds

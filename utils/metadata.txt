@@ -1,0 +1,12 @@
+MSCE-24h-1-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-24h-1-ATAC/outs
+MSCE-24h-2-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-24h-2-ATAC/outs
+MSCE-24h-3-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-24h-3-ATAC/outs
+MSCE-3h-1-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-3h-1-ATAC/outs
+MSCE-3h-2-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-3h-2-ATAC/outs
+MSCE-3h-3-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-3h-3-ATAC/outs
+MSCE-72h-1-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-72h-1-ATAC/outs
+MSCE-72h-2-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-72h-2-ATAC/outs
+MSCE-72h-3-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-72h-3-ATAC/outs
+MSCE-control-1-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-control-1-ATAC/outs
+MSCE-control-2-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-control-2-ATAC/outs
+MSCE-control-3-ATAC  /home/ye/Data/dataset/CEpi-ATAC/mouse//MSCE-control-3-ATAC/outs
