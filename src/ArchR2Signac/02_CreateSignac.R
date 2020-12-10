@@ -82,7 +82,7 @@ message("INFO : Make Combined Object ...")
 #counts=GetAssayData(seurat,"counts",assay="ATAC")
 fragments=fragment_assay_list
 metadata=do.call(rbind,meta_list)
-#metadata=seurat@meta.data
+rownames(metadata)=metadata$Cells
 
 message("INFO : CreateChromatinAssay ...")
 peaks.assay=CreateChromatinAssay(counts=counts,
@@ -91,8 +91,9 @@ peaks.assay=CreateChromatinAssay(counts=counts,
                                   sep = c("-", "-"),
                                   annotation=annotations,
                                   validate.fragments = FALSE)
-seurat <- CreateSeuratObject(peaks.assay, assay = "ATAC",meta.data = metadata)
-
+seurat <- CreateSeuratObject(peaks.assay, assay = "ATAC")
+metadata=metadata[colnames(seurat),]
+seurat=AddMetaData(seurat,metadata)
 message("INFO : gA RNA Assay Object ...")
 archrGA <- CreateAssayObject(counts =score)
 seurat[['archrGA']] <- archrGA
@@ -114,6 +115,7 @@ for(name in embeds){
 	slotName=str_split(name,"\\.")[[1]][1]
 	cat(sprintf("INFO : add Slot [ %s ]\n",slotName))
         mat=readRDS(file.path(EmbeddingDir,name))
+	mat=mat[Cells(seurat),]
 
         slot=paste0(prefix,str_to_lower(slotName))
         #colnames(mat)=paste(paste0(slot,"_"),1:ncol(mat),sep = "")
@@ -126,6 +128,7 @@ for(name in reuds ){
 	slotName=str_split(name,"\\.")[[1]][1]
 	cat(sprintf("INFO : add Slot [ %s ]\n",slotName))
 	mat=readRDS(file.path(ReducedDimDir,name))
+	mat=mat[Cells(seurat),]
 
         slot=paste0(prefix,str_to_lower(slotName))
         seurat[[slot]]<-CreateDimReducObject(embeddings =mat,

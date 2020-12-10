@@ -88,7 +88,7 @@ cells=getCellNames(projHeme)
 
 if(!is.null(args$column) & !is.null(args$subset)){
 	assertthat::assert_that(args$column%in%colnames(metadata))
-	cat(sprintf("INFO : Subset from [ %s ] with : [ %s ]",args$column,paste(args$subset),collapse=","))
+	cat(sprintf("INFO : Subset from [ %s ] with : [ %s ]\n",args$column,paste(args$subset,collapse=",")))
         target=metadata[[args$column]]
 
         stopifnot(args$subset%in%unique(target))
@@ -174,11 +174,11 @@ for(i in seq_along(arrowFiles)){
 		fragment=getFragmentsFromArrow(ArrowFile=arrowFiles[i],chr=keepChrs,cellNames=keepCells)
 	        fragment=as.data.frame(fragment)
 	        #cell=unlist(lapply(fragment$RG,function(cell)return(str_split(cell,"#")[[1]][2])))
-	        #fragment$cells=cell
+	        fragment$count=1
 
 		outFrag=file.path(fragmentDir,paste0(donor,"_fragment.tsv"))
 		cat(sprintf("INFO : Write fragment into : [ %s ] \n",outFrag)) 
-	        write.table(fragment[,c("seqnames","start","end","RG")],outFrag,sep="\t",row.names=F,quote=F,col.names=F)
+	        write.table(fragment[,c("seqnames","start","end","RG","count")],outFrag,sep="\t",row.names=F,quote=F,col.names=F)
 
 	        zipFrag=ZipAndBuildTbi(outFrag)
 	        fragment_list[[donor]]=zipFrag
@@ -289,7 +289,7 @@ combined.peaks=UnifyPeaks(seurat_list)
 ####################################   Merge all Object
 combined_list=list()
 fragment_assay_list=list()
-meta_list=list()
+Meta_list=list()
 message("INFO : Make Feature Matrix ...")
 i=1
 for(name in names(fragment_list)){
@@ -318,12 +318,12 @@ for(name in names(fragment_list)){
         #                        assay = 'archrGA',
         #                        normalization.method = 'LogNormalize')
 	combined_list[[name]]=seurat
-	meta_list[[name]]=seurat@meta.data
+	Meta_list[[name]]=seurat@meta.data
 	fragment_assay_list[[name]]=Fragments(seurat)[[1]]
 	i=i+1
 }
 
-saveRDS(meta_list,file.path(outDir,"meta_list.rds"))
+saveRDS(Meta_list,file.path(outDir,"meta_list.rds"))
 saveRDS(combined_list,file.path(outDir,"seurat_list.rds"))
 saveRDS(fragment_assay_list,file.path(outDir,"fragment_assay_list.rds"))
 
