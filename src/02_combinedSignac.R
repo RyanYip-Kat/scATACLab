@@ -66,7 +66,7 @@ cell_list=list()
 for(i in seq_along(Files)){
 	    name=Names[i]
 	    file=Files[i]
-	    cat(sprintf("INFO : [ %d of %d] --- [ %s from %s] \n",i,length(Files),name,file))
+	    cat(sprintf("INFO : [ time : %s ] --- [ %d of %d] --- [ %s from %s] \n",Sys.time(),i,length(Files),name,file))
 	    seurat=readRDS(file)
 	    counts=GetAssayData(seurat,"counts")
 	    colnames(counts)=paste(name,colnames(counts),sep=sep)
@@ -79,24 +79,26 @@ for(i in seq_along(Files)){
                                              fragments = fragment)
 	    seurat <- CreateSeuratObject(
                                      counts = seurat_assay,
-                                     assay = 'peaks',
-                                     project = 'ATAC')
+                                     assay = 'ATAC',
+                                     project = 'scATAC')
 
 	    seurat_list[[name]]=seurat
 	    fragment_list[[name]]=fragment
 	    cell_list[[name]]=Cells(seurat)
 }
 
+saveRDS(cell_list,file.path(outDir,"cell_list.rds"))
 ###############################
 combined.peaks=UnifyPeaks(seurat_list)
 
 ####################################   Merge all Object
 combined_list=list()
 fragment_assay_list=list()
+meta_list=list()
 message("INFO : Make Feature Matrix ...")
 i=1
 for(name in names(fragment_list)){
-        cat(sprintf("INFO : [ %d of %d ]\n",i,length(fragment_list)))
+        cat(sprintf("INFO : [ time : %s ] --- [ %d of %d ]\n",Sys.time(),i,length(fragment_list)))
         cells=cell_list[[name]]
         fragment=fragment_list[[name]]
 
@@ -114,21 +116,31 @@ for(name in names(fragment_list)){
 	fragment_assay_list[[name]]=Fragments(seurat)[[1]]
         #seurat=AddMetaData(seurat,meta_list[[name]])
         seurat$dataset=name
-        cat(sprintf("INFO :  Object Size  : [ %d , %d ] \n",nrow(seurat),ncol(seurat)))
+	seurat$Cells=Cells(seurat)
+        cat(sprintf("INFO : [ time : %s ] --- Object Size  : [ %d , %d ] \n",Sys.time(),nrow(seurat),ncol(seurat)))
         combined_list[[name]]=seurat
+	meta_list[[name]]=seurat@meta.data
         i=i+1
 }
 
 message("INFO : Merge Object ...")
-seurat=merge(x=combined_list[[1]],
-             y=combined_list[-1])
-             #add.cell.ids=names(combined_list))  # add name+"_" prefix
+###################################
+message("INFO : Merge Count lists ...")
+#seurat=Reduce(merge,seurat_list)
+count_list=lapply(combined_list,function(seurat){return(GetAssayData(seurat,"counts",assay="ATAC"))})
+counts=do.call(cbind,count_list)
+##################################### Create Combined Object
+metadata=do.call(rbind,meta_list)
 
+#seurat=merge(x=combined_list[[1]],
+#             y=combined_list[-1])
+             #add.cell.ids=names(combined_list))  # add name+"_" prefix
+#seurat=Reduce(merge,combined_list)
 ##################################### Create Combined Object
 message("INFO : Make Combined Object ...")
-counts=GetAssayData(seurat,"counts",assay="ATAC")
+#counts=GetAssayData(seurat,"counts",assay="ATAC")
 fragments=fragment_assay_list
-metadata=seurat@meta.data
+#metadata=seurat@meta.data
 
 peaks.assay=CreateChromatinAssay(counts=counts,
 				  fragments=fragments,
@@ -136,7 +148,10 @@ peaks.assay=CreateChromatinAssay(counts=counts,
 				  sep = c("-", "-"),
 				  annotation=annotations,
 				  validate.fragments = FALSE)
-seurat <- CreateSeuratObject(peaks.assay, assay = "peaks",meta.data = metadata)
+seurat <- CreateSeuratObject(peaks.assay, assay = "ATAC")
+rownames(metadata)=metadata$Cells
+metadata=metadata[Cells(seurat),]
+seurat=AddMetaData(seurat,metadata)
 Annotation(seurat) <- annotations
 
 

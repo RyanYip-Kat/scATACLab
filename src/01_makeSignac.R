@@ -38,7 +38,7 @@ makedir<-function(path){
 make10XObject=function(path,genome){
 	files=list.files(path)
 	assertthat::assert_that("fragments.tsv.gz"%in%files)
-	assertthat::assert_that("singlecell.csv"%in%files)
+	#assertthat::assert_that("singlecell.csv"%in%files)
 	assertthat::assert_that("filtered_peak_bc_matrix.h5"%in%files)
 
 	countDir=file.path(path,"filtered_peak_bc_matrix.h5")
@@ -51,21 +51,36 @@ make10XObject=function(path,genome){
 			     file = metaDir,
 			     header = TRUE,
 			     row.names = 1)
-	
+        metadata=metadata[2:nrow(metadata),]	
 	seurat_assay <- CreateChromatinAssay(
 					     counts = counts,
 					     sep = c(":", "-"),
 					     genome =genome,
 					     fragments = fragDir,
-					     min.features = 200,
-					     min.cells = 10)
+					     min.features = 0,#200,
+					     min.cells = 1)#10
 	seurat <- CreateSeuratObject(
 				     counts = seurat_assay,
-				     assay = 'peaks',
-				     project = 'ATAC',
-				     min.cells=200,
-				     meta.data = metadata)
-
+				     assay = 'ATAC',
+				     project = 'scATAC',
+				     min.cells=0) #200
+        metadata=metadata[Cells(seurat),]
+	seurat=AddMetaData(seurat,metadata)
+	if("analysis"%in%files){
+		metadata=list()
+		clusterFiles=list.files(file.path(path,"analysis"),"clusters.csv",recursive=T,full.names=T)
+		for(i in seq_along(clusterFiles)){
+			file=clusterFiles[i]
+			name=str_split(basename(dirname(file)),"\\.")[[1]][1]
+			cat(sprintf("INFO : [ time : %s ] -- [ %d of %d ] --- [ %s from %s ] \n",Sys.time(),i,length(clusterFiles),name,file))
+			DF=read.csv(file,sep=",",header=TRUE,row.names=1,stringsAsFactors=FALSE)
+			colnames(DF)=name
+			metadata[[name]]=DF
+		}
+		meta.data=do.call(cbind,metadata)
+		meta.data=meta.data[Cells(seurat),]
+		seurat=AddMetaData(seurat,meta.data)
+	}
 	message("INFO : Make Done!")
 	return(seurat)
 }
@@ -107,17 +122,19 @@ seurat <- NucleosomeSignal(object = seurat)
 message("INFO : compute TSS enrichment score per cell")
 seurat <- TSSEnrichment(object = seurat, fast = FALSE)
 
+
 message("INFO : add blacklist ratio and fraction of reads in peaks")
 seurat$pct_reads_in_peaks <- seurat$peak_region_fragments / seurat$passed_filters * 100
 seurat$blacklist_ratio <- seurat$blacklist_region_fragments / seurat$peak_region_fragments
 
 seurat$high.tss <- ifelse(seurat$TSS.enrichment > 2, 'High', 'Low')
-p=TSSPlot(seurat, group.by = 'high.tss') + NoLegend()
-ggsave(file.path(MetricDir,"high.tss.pdf"),plot=p,width=10,height=12)
 
 seurat$nucleosome_group <- ifelse(seurat$nucleosome_signal > 4, 'NS > 4', 'NS < 4')
-p=FragmentHistogram(object = seurat, group.by = 'nucleosome_group')
-ggsave(file.path(MetricDir,"nucleosome_group.pdf"),plot=p,width=10,height=12)
+message("INFO : Save Object")
+saveRDS(seurat,file.path(outDir,"seurat.rds"))
+
+p=TSSPlot(seurat, group.by = 'high.tss') + NoLegend()
+ggsave(file.path(MetricDir,"high.tss.pdf"),plot=p,width=10,height=12)
 
 p=VlnPlot(
   object = seurat,
@@ -129,6 +146,4 @@ p=VlnPlot(
 
 ggsave(file.path(MetricDir,"multiple_metric.pdf"),plot=p,width=24,height=10)
 message("INFO : Sample Metric Done!")
-############################### Save
-message("INFO : Save Object")
-saveRDS(seurat,file.path(outDir,"seurat.rds"))
+message("INFO : Done!")
