@@ -1,0 +1,5 @@
+HC,Results/hc/seurat.rds
+RPE,Results/rpe/seurat.rds
+MAC,Results/mac/seurat.rds
+RET,Results/ret/seurat.rds
+Thyroid,Results/thyroid/seurat.rds

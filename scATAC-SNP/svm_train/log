@@ -1,0 +1,55 @@
+nohup: ignoring input
+ importing sequences for reproduciblePeaksBed/Th17.bed from BSgenome.Hsapiens.UCSC.hg38 
+ calculating repeat distributions
+ Trial 1 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+4726 sequences found so far,  82759  remaining.
+ Trial 2 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+9150 sequences found so far,  78335  remaining.
+ Trial 3 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+13391 sequences found so far,  74094  remaining.
+ Trial 4 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+17326 sequences found so far,  70159  remaining.
+ Trial 5 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+20920 sequences found so far,  66565  remaining.
+ Trial 6 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+24190 sequences found so far,  63295  remaining.
+ Trial 7 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+27239 sequences found so far,  60246  remaining.
+ Trial 8 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+29981 sequences found so far,  57504  remaining.
+ Trial 9 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+32491 sequences found so far,  54994  remaining.
+ Trial 10 out of 10 
+ importing sequences
+ calculating repeat distributions
+ matching sequences
+34909 sequences found so far,  52576  remaining.
+[1] "gkmModels/Th17/ctcfneg.fa"
+[1] "INFO : filter fasta"

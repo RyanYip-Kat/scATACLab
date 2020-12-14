@@ -1,0 +1,14 @@
+./reproduciblePeaksBed/ASDC.bed
+./reproduciblePeaksBed/Baso.bed
+./reproduciblePeaksBed/CD4-CTL.bed
+./reproduciblePeaksBed/CD4-Naive.bed
+./reproduciblePeaksBed/CD8-Naive.bed
+./reproduciblePeaksBed/CD8-TCM.bed
+./reproduciblePeaksBed/cDC1.bed
+./reproduciblePeaksBed/cDC2.bed
+./reproduciblePeaksBed/CM.bed
+./reproduciblePeaksBed/DN2B.bed
+./reproduciblePeaksBed/DNT.bed
+./reproduciblePeaksBed/ILC.bed
+./reproduciblePeaksBed/IntM.bed
+./reproduciblePeaksBed/MAIT.bed

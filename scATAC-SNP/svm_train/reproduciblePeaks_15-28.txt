@@ -1,0 +1,15 @@
+./reproduciblePeaksBed/memory-B.bed
+./reproduciblePeaksBed/memory-T.bed
+./reproduciblePeaksBed/Naive-B.bed
+./reproduciblePeaksBed/NCM.bed
+./reproduciblePeaksBed/NK1.bed
+./reproduciblePeaksBed/NK2.bed
+./reproduciblePeaksBed/NK3.bed
+./reproduciblePeaksBed/pDC.bed
+./reproduciblePeaksBed/Plasma.bed
+./reproduciblePeaksBed/Tfh.bed
+./reproduciblePeaksBed/Th17.bed
+./reproduciblePeaksBed/Th1.bed
+./reproduciblePeaksBed/Th2.bed
+./reproduciblePeaksBed/Treg.bed
+

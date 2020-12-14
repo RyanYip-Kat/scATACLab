@@ -1,0 +1,129 @@
+nohup: ignoring input
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Allergy
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Allergy
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Alopecia_areata
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Alopecia_areata
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Alzheimers_combined
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Alzheimers_combined
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Ankylosing_spondylitis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Ankylosing_spondylitis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Asthma
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Asthma
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Atopic_dermatitis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Atopic_dermatitis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Autoimmune_thyroiditis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Autoimmune_thyroiditis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Behcets_disease
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Behcets_disease
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Bone_mineral_density
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Bone_mineral_density
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Celiac_disease
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Celiac_disease
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Chronic_kidney_disease
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Chronic_kidney_disease
+### Compute CHEERS Enrichment
+    TRAIT  NAME : C_reactive_protein
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/C_reactive_protein
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Creatinine_levels
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Creatinine_levels
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Crohns_disease
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Crohns_disease
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Fasting_glucose_related_traits
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Fasting_glucose_related_traits
+### Compute CHEERS Enrichment
+    TRAIT  NAME : gd_fromCatalog
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/gd_fromCatalog
+### Compute CHEERS Enrichment
+    TRAIT  NAME : HDL_cholesterol
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/HDL_cholesterol
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Juvenile_idiopathic_arthritis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Juvenile_idiopathic_arthritis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Kawasaki_disease
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Kawasaki_disease
+### Compute CHEERS Enrichment
+    TRAIT  NAME : LDL_cholesterol
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/LDL_cholesterol
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Liver_enzyme_levels_gamma_glutamyl_transferase
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Liver_enzyme_levels_gamma_glutamyl_transferase
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Migraine
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Migraine
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Multiple_sclerosis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Multiple_sclerosis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Platelet_counts
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Platelet_counts
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Primary_biliary_cirrhosis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Primary_biliary_cirrhosis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Primary_sclerosing_cholangitis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Primary_sclerosing_cholangitis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Progressive_supranuclear_palsy
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Progressive_supranuclear_palsy
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Psoriasis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Psoriasis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Red_blood_cell_traits
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Red_blood_cell_traits
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Renal_function_related_traits_BUN
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Renal_function_related_traits_BUN
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Restless_legs_syndrome
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Restless_legs_syndrome
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Rheumatoid_arthritis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Rheumatoid_arthritis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Systemic_lupus_erythematosus
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Systemic_lupus_erythematosus
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Systemic_sclerosis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Systemic_sclerosis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Triglycerides
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Triglycerides
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Type_1_diabetes
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Type_1_diabetes
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Type_2_diabetes
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Type_2_diabetes
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Ulcerative_colitis
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Ulcerative_colitis
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Urate_levels
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Urate_levels
+### Compute CHEERS Enrichment
+    TRAIT  NAME : Vitiligo
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Vitiligo
+### Compute CHEERS Enrichment
+    TRAIT  NAME : vkh_fromUVO
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/vkh_fromUVO
+iligo
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/Vitiligo
+### Compute CHEERS Enrichment
+    TRAIT  NAME : vkh_fromUVO
+    LD TRAIT : /home/ye/Work/BioAligment/SNP/Shi/CHEERS/LD_block/hg19/vkh_fromUVO

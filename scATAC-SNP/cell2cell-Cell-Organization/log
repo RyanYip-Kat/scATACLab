@@ -1,0 +1,25 @@
+nohup: ignoring input
+[ ][APP][10/12/20-18:17:27][WARNING] Latest local available version is `v2.0.0`, using it
+[ ][APP][10/12/20-18:17:27][WARNING] User selected downloaded database `v2.0.0` is available, using it
+[ ][CORE][10/12/20-18:17:27][INFO] Initializing SqlAlchemy CellPhoneDB Core
+[ ][CORE][10/12/20-18:17:27][INFO] Using custom database at /home/ye/.cpdb/releases/v2.0.0/cellphone.db
+[ ][APP][10/12/20-18:17:27][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
+[ ][APP][10/12/20-18:17:27][INFO] Launching Method _set_paths
+[ ][APP][10/12/20-18:17:27][WARNING] Output directory (/home/ye/Work/BioAligment/SNP/Shi/cell2cell-Cell-Organization/cellphonedb/bd/out) exist and is not empty. Result can overwrite old results
+[ ][APP][10/12/20-18:17:27][INFO] Launching Method _load_meta_counts
+[ ][CORE][10/12/20-18:26:53][INFO] Launching Method cpdb_statistical_analysis_launcher
+[ ][CORE][10/12/20-18:26:53][INFO] Launching Method _counts_validations
+[ ][CORE][10/12/20-18:30:18][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:24 Precision:3
+[ ][CORE][10/12/20-18:30:18][INFO] Running Simple Prefilters
+[ ][CORE][10/12/20-18:30:21][INFO] Running Real Simple Analysis
+[ ][CORE][10/12/20-18:30:24][INFO] Running Statistical Analysis
+/home/ye/anaconda3/envs/cellphonedb/lib/python3.7/site-packages/sklearn/utils/deprecation.py:143: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+  warnings.warn(message, FutureWarning)
+[ ][CORE][10/12/20-20:17:49][INFO] Building Pvalues result
+[ ][CORE][10/12/20-20:19:35][INFO] Building Simple results
+[ ][CORE][10/12/20-20:19:39][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:24 Precision:3
+[ ][CORE][10/12/20-20:19:39][INFO] Running Complex Prefilters
+[ ][CORE][10/12/20-20:24:14][INFO] Running Real Complex Analysis
+[ ][CORE][10/12/20-20:24:17][INFO] Running Statistical Analysis
+[ ][CORE][10/12/20-22:04:31][INFO] Building Pvalues result
+[ ][CORE][10/12/20-22:05:22][INFO] Building Complex results
