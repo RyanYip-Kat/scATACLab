@@ -9,7 +9,7 @@ library(GenomicRanges)
 library(future)
 
 
-source("/home/ye/Work/BioAligment/SNP/Shi/scripts/help_functions.R")
+source("/home/ye/Work/R/scATAC/Signac/src/helper_functions.R")
 parser <- ArgumentParser(description='Process some tasks')
 parser$add_argument("--project",
                     type="character",
@@ -58,21 +58,6 @@ bgzip="/home/ye/anaconda3/envs/BulkBio/bin/bgzip"
 tabix="/home/ye/anaconda3/envs/BulkBio/bin/tabix"
 
 #############################
-ZipAndBuildTbi=function(gzipFile){
-	fileName=file.path(dirname(gzipFile),paste0("sorted-",basename(gzipFile)))
-	cmd=paste0("sort -k1,1d -k2,2n -k3,3n"," ",gzipFile," > ",fileName)
-	system(cmd)
-	cmd=paste0(bgzip," ",fileName)
-	message("INFO : Zip File ...")
-	system(cmd)
-
-	cmd=paste0(tabix," ","--preset=bed"," ",fileName,".gz")
-	message("INFO : Build tabix Index  ...")
-	system(cmd)
-	system(paste0("rm ",gzipFile))
-	return(paste0(fileName,".gz"))
-}
-
 
 message("INFO : Loading dataset")
 addArchRThreads(threads=16)
@@ -150,7 +135,11 @@ metadata$Cells=cellNames
 
 arrowFiles=getArrowFiles(projHeme)
 Donors=names(arrowFiles)
-keepChrs=paste("chr",c(1:22,"X","Y"),sep="")
+if(args$genome=="hg38"){
+	keepChrs=paste("chr",c(1:22,"X","Y"),sep="")
+}else{
+	keepChrs=paste("chr",c(1:19,"X"),sep="")
+}
 
 ############################### list objects
 fragment_list=list()
@@ -214,7 +203,7 @@ for(name in names(count_list)){
 	fragment=fragment_list[[name]]
 	CAssay=CreateChromatinAssay(counts=count,
 				   sep = c(":", "-"),
-				   genome="hg38",
+				   genome=args$genome,
 				   fragments=fragment,validate.fragments=F)
 	seurat=CreateSeuratObject(CAssay,assay = 'peaks',project = 'ATAC')
 	seurat=AddMetaData(seurat,meta_list[[name]])
@@ -235,9 +224,19 @@ for(name in names(count_list)){
 saveRDS(rna_list,file.path(outDir,"GA_list.rds"))
 
 ###############################  Annotation Peaks 
-annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v86)
+Genome=args$genome
+if(Genome=="hg38"){
+        library(EnsDb.Hsapiens.v86)
+        annotations <- GetGRangesFromEnsDb(ensdb=EnsDb.Hsapiens.v86)
+        annoFile="/home/ye/Data/10X/VDJ/ref/refdata-cellranger-GRCh38-3.0.0/genes/genes.gtf"
+}else{
+        library(EnsDb.Mmusculus.v79)
+        annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Mmusculus.v79)
+        annoFile="/home/ye/Data/10X/VDJ/ref/refdata-cellranger-mm10-3.0.0/genes/genes.gtf"
+}
 seqlevelsStyle(annotations) <- 'UCSC'
-genome(annotations) <- args$genome #"hg38"
+genome(annotations) <- Genome
+
 
 message("INFO : Annotate Signac Object")
 bed_list=list()
