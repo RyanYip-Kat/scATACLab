@@ -12,7 +12,7 @@ featureName <- function(gr){
 
 
 
-DF=read.table("tf2target/degs-hcbd-cdc-logfc0.01.csv",sep=",",stringsAsFactors=F,header=TRUE,row.names=1)
+DF=read.table("tf2target/degs-hcbd-cdc-logfc0.01.csv",sep=",",stringsAsFactors=F,header=TRUE,row.names=1)   # from Seurat FindAllMarkers function
 #DF=read.csv("tf2target/_markers.csv",sep=",",stringsAsFactors=F,header=TRUE)
 Cols=unique(DF$cluster)
 LFC=list()
