@@ -12,11 +12,11 @@ featureName <- function(gr){
 
 
 
-diffObj=readRDS("tf2target/degs-geneIntegraMatrix-hcbd-cdc.rds")
+diffObj=readRDS("tf2target/degs-geneIntegraMatrix-hcbd-cdc.rds")   # from ArchR's getMarkerFeatures() with useMatrix="GeneIntegrationMatrix"
 rownames(diffObj)=rowData(diffObj)$name
-diffATAC=readRDS("tf2target/degs-markerTest-hcbd-cdc.rds")
-p2gLinks=readRDS("tf2target/Save_HCBD_P2G_Links.rds")$linksSig
-matches=readRDS("tf2target/Matches.rds")
+diffATAC=readRDS("tf2target/degs-markerTest-hcbd-cdc.rds")     #  from ArchR's getMarkerFeatures() with  useMatrix="PeakMatrix"
+p2gLinks=readRDS("tf2target/Save_HCBD_P2G_Links.rds")$linksSig   # from ArchR's getPeak2GeneLinks() and refer to https://github.com/GreenleafLab/MPAL-Single-Cell-2019/blob/JG/scRNA_scATAC_Integration_03_Compute_Peak_to_Gene_links.R
+matches=readRDS("tf2target/Matches.rds")   #  from ArchR's getMatches
 
 ################################
 
