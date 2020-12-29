@@ -3,6 +3,7 @@ library(Signac)
 library(ggplot2)
 library(stringr)
 
+source("/home/ye/Work/R/scATAC/ArchR/plotter/plotDF.R")
 tolower<-str_to_lower
 quantileCut<-function (x = NULL, lo = 0.025, hi = 0.975, maxIf0 = TRUE)
 {
@@ -121,7 +122,7 @@ MyplotEmbedding <- function(
   })
   }else if(tolower(colorBy) == "matrix"){
     Mat=GetAssayData(seurat,slot="data",assay=assay)
-    colorMat=Mat[name,]
+    colorMat=Mat[name,,drop=FALSE]
 
     if(!all(rownames(df) %in% colnames(colorMat))){
       stop("Not all cells in embedding are present in matrix. This may be due to using a custom embedding.")
@@ -250,7 +251,7 @@ parser$add_argument("--colorBy",
                     help="metadata or matrix")
 
 parser$add_argument("--name",
-                    #nargs="+",
+                    nargs="+",
                     type="character",
                     default=NULL,
                     help="genes name or column to be plotted")
@@ -278,20 +279,33 @@ makedir(outDir)
 ################################
 message("INFO : Loading  dataset ...")
 seurat=readRDS(args$seurat)
-DF=read.csv(args$name,stringsAsFactors=F,sep=",",header=F)
-features=as.character(DF$V1)
-
+#DF=read.csv(args$name,stringsAsFactors=F,sep=",",header=F)
+#features=as.character(DF$V1)
+features=args$name
 plotList=MyplotEmbedding(seurat=seurat,
 			 assay=args$assay,
 			 embedding=args$embed,
 			 name=features,
 			 colorBy=args$colorBy)
 
-for(name in names(plotList)){
+if(length(features)==1){
+	p=plotList
+	svg(file.path(outDir,paste0(features,".svg")),width=12,height=10)
+	print(p)
+        dev.off()
+}else{
+	for(name in names(plotList)){
                 cat(sprintf("INFO : Save --- [ %s ] \n",name))
                 p=plotList[[name]] #+ ggpubr::stat_compare_means()
-                ggsave(file.path(outDir,paste0(name,".pdf")),plot=p,width=12,height=10)
+		if(args$colorBy=="matrix"){
+			ggsave(file.path(outDir,paste0(name,".pdf")),plot=p,width=12,height=10)
+		}else{
+			svg(file.path(outDir,paste0(name,".svg")),width=12,height=10)
+			print(p)
+			dev.off()
+			#MyplotPDF(p,name=name,outpath=outDir,width=12,height=10)
+		}
         }
-
+}
 message("INFO : Done!")
 
