@@ -1,0 +1,4 @@
+3h-1,/home/ye/Work/SnapATAC/snapFragment/3h-1/crg.snap,/home/ye/Data/dataset/cellranger-aggr/CEpi-ATAC/mouse/MSCE-3h-1-ATAC/outs/singlecell.csv
+24h-1,/home/ye/Work/SnapATAC/snapFragment/24h-1/crg.snap,/home/ye/Data/dataset/cellranger-aggr/CEpi-ATAC/mouse/MSCE-24h-1-ATAC/outs/singlecell.csv
+72h-1,/home/ye/Work/SnapATAC/snapFragment/72h-1/crg.snap,/home/ye/Data/dataset/cellranger-aggr/CEpi-ATAC/mouse/MSCE-72h-1-ATAC/outs/singlecell.csv
+control-1,/home/ye/Work/SnapATAC/snapFragment/control-1/crg.snap,/home/ye/Data/dataset/cellranger-aggr/CEpi-ATAC/mouse/MSCE-control-1-ATAC/outs/singlecell.csv
