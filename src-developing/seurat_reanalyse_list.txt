@@ -1,0 +1,9 @@
+MSCE-24h-1-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-24h-1-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-24h-1-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-24h-2-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-24h-2-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-24h-2-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-3h-1-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-3h-1-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-3hh-1-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-3h-3-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-3h-3-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-3h-3-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-72h-1-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-72h-1-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-72h-1-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-72h-2-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-72h-2-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-72h-2-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-72h-3-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-72h-3-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-72h-3-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-control-2-ATAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-control-2-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-control-2-RNA/outs/filtered_feature_bc_matrix.h5
+MSCE-control-3-AYAC /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-control-3-RNA/seurat.rds /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-control-3-RNA/outs/filtered_feature_bc_matrix.h5

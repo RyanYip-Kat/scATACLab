@@ -1,0 +1,174 @@
+nohup: ignoring input
+Loading required package: ggplot2
+Loading required package: SummarizedExperiment
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Loading required package: DelayedArray
+Loading required package: matrixStats
+
+Attaching package: ‘matrixStats’
+
+The following objects are masked from ‘package:Biobase’:
+
+    anyMissing, rowMedians
+
+
+Attaching package: ‘DelayedArray’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges
+
+The following objects are masked from ‘package:base’:
+
+    aperm, apply, rowsum
+
+
+Attaching package: ‘SummarizedExperiment’
+
+The following object is masked from ‘package:Seurat’:
+
+    Assays
+
+Loading required package: data.table
+
+Attaching package: ‘data.table’
+
+The following object is masked from ‘package:SummarizedExperiment’:
+
+    shift
+
+The following object is masked from ‘package:GenomicRanges’:
+
+    shift
+
+The following object is masked from ‘package:IRanges’:
+
+    shift
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, second
+
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+Loading required package: rhdf5
+Loading required package: magrittr
+[1] "Setting default genome  with :mm10"
+Setting default genome to Mm10.
+[1] "Setting threads  :16"
+Setting default number of Parallel threads to 16.
+               V1
+1 MSCE-24h-1-ATAC
+2 MSCE-24h-2-ATAC
+                                                                                                                       V2
+1 /home/ye/Work/R/scATAC/ArchR/20201010/ArchR_results/CEpi_Mouse2_Clusters/Save-ProjHeme/ArrowFiles/MSCE-24h-1-ATAC.arrow
+2 /home/ye/Work/R/scATAC/ArchR/20201010/ArchR_results/CEpi_Mouse2_Clusters/Save-ProjHeme/ArrowFiles/MSCE-24h-2-ATAC.arrow
+                                                                                      V3
+1 /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-24h-1-RNA/outs/filtered_feature_bc_matrix.h5
+2 /home/ye/Data/dataset/CEpi_RNA/mouse/MSCE-24h-2-RNA/outs/filtered_feature_bc_matrix.h5
+                                                                                            V4
+1 /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-24h-1-RNA/seurat.rds
+2 /home/ye/Work/Python/SingleCell/Project/CEpi_Mouse/20201013/output/MSCE-24h-2-RNA/seurat.rds
+[1] "### Loading Seurats"
+[1] "MSCE-24h-1-ATAC#AAACCCAAGAGCTGAC-1" "MSCE-24h-1-ATAC#AAACCCAAGCGCCTAC-1"
+[3] "MSCE-24h-1-ATAC#AAACCCAAGGCCATAG-1" "MSCE-24h-1-ATAC#AAACCCAAGGTCACTT-1"
+[5] "MSCE-24h-1-ATAC#AAACCCACAACCACAT-1" "MSCE-24h-1-ATAC#AAACCCACACCTCTGT-1"
+[1] "MSCE-24h-2-ATAC#AAACCCAAGAGGACTC-1" "MSCE-24h-2-ATAC#AAACCCAAGATCCCAT-1"
+[3] "MSCE-24h-2-ATAC#AAACCCAAGCGGATCA-1" "MSCE-24h-2-ATAC#AAACCCAAGTAGCAAT-1"
+[5] "MSCE-24h-2-ATAC#AAACCCACACTCTAGA-1" "MSCE-24h-2-ATAC#AAACCCAGTCCACATA-1"
+[1] "### Import scRNA"
+Importing Feature Matrix 1 of 2
+Importing Feature Matrix 2 of 2
+[1] "### Subset seRNA from Seurat"
+[1] "### Create ArchRProject"
+Using GeneAnnotation set by addArchRGenome(Mm10)!
+Using GeneAnnotation set by addArchRGenome(Mm10)!
+Validating Arrows...
+Getting SampleNames...
+1 2 
+Copying ArrowFiles to Ouptut Directory! If you want to save disk space set copyArrows = FALSE
+1 2 
+Getting Cell Metadata...
+1 2 
+Merging Cell Metadata...
+Initializing ArchRProject...
+
+                                                   / |
+                                                 /    \
+            .                                  /      |.
+            \\\                              /        |.
+              \\\                          /           `|.
+                \\\                      /              |.
+                  \                    /                |\
+                  \\#####\           /                  ||
+                ==###########>      /                   ||
+                 \\##==......\    /                     ||
+            ______ =       =|__ /__                     ||      \\\
+        ,--' ,----`-,__ ___/'  --,-`-===================##========>
+       \               '        ##_______ _____ ,--,__,=##,__   ///
+        ,    __==    ___,-,__,--'#'  ==='      `-'    | ##,-/
+        -,____,---'       \\####\\________________,--\\_##,/
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+[1] "### addGeneExpressionMatrix from seRNA"
+ArchR logging to : ArchRLogs/ArchR-addGeneExpressionMatrix-35eb1cf2e4e9-Date-2020-10-17_Time-19-03-05.log
+If there is an issue, please report to github with logFile!
+2020-10-17 19:03:05 : Overlap w/ scATAC = 0
+2020-10-17 19:03:05 : Overlap Per Sample w/ scATAC : MSCE-24h-1-ATAC=0,MSCE-24h-2-ATAC=0
+Error in h(simpleError(msg, call)) : 
+  error in evaluating the argument 'x' in selecting a method for function 'colSums': unable to find an inherited method for function ‘assay’ for signature ‘"matrix", "missing"’
+Calls: addGeneExpressionMatrix -> <Anonymous> -> assay -> <Anonymous>
+Execution halted

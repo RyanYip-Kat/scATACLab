@@ -1,0 +1,2 @@
+/home/ye/Data/dataset/multiome-atac-gex/human_brain_3k/human_brain_3k_atac_fragments.tsv.gz,/home/ye/Data/dataset/multiome-atac-gex/human_brain_3k/human_brain_3k_filtered_feature_bc_matrix.h5,brain3k,4,1000
+/home/ye/Data/dataset/multiome-atac-gex/human_pbmc_health_3k/pbmc_unsorted_3k_atac_fragments.tsv.gz,/home/ye/Data/dataset/multiome-atac-gex/human_pbmc_health_3k/pbmc_unsorted_3k_filtered_feature_bc_matrix.h5,pbmc3k,4,1000
