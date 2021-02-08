@@ -5,7 +5,7 @@ library(motifmatchr)
 library(chromVARmotifs)
 library(SummarizedExperiment)
 library(argparse)
-#library(BSgenome.Hsapiens.UCSC.hg38)
+library(BSgenome.Hsapiens.UCSC.hg38)
 library(BSgenome.Mmusculus.UCSC.mm10)
 parser <- ArgumentParser(description='ChromVAR handle motif from ArchR')
 parser$add_argument("--project",
@@ -13,6 +13,11 @@ parser$add_argument("--project",
                     default=NULL,
                     help="ArchR Project Path")
 
+parser$add_argument("--species",
+                    type="character",
+                    default="human",
+		    choices=c("human","mouse"),
+                    help="ArchR Project Path")
 
 parser$add_argument("--outdir",
                     type="character",
@@ -29,7 +34,7 @@ makedir<-function(path){
 outDir=args$outdir
 makedir(outDir)
 # getJasparMotifs() # "Mus musculus" or "Homo sapiens"
-getMotifsDB=function (species = "Mus musculus", collection = "CORE", ...)
+getMotifsDB=function (species = "Mus musculus", collection = "CORE",motifSet = "cisbp", ...)
 {
     opts <- list()
     opts["species"] <- species
@@ -48,9 +53,16 @@ features=getPeakSet(projHeme)
 #MotifMatrix=getMatrixFromProject(projHeme,useMatrix="MotifMatrix")
 #dev=new("chromVARDeviations", MotifMatrix)
 #chromvar.z <- SummarizedExperiment::assays(dev)[[2]]
-data("mouse_pwms_v2")
-motifs = mouse_pwms_v2
 
+if(args$species=="human"){
+	genome=BSgenome.Hsapiens.UCSC.hg38
+	data("human_pwms_v2")
+	motifs=human_pwms_v2
+}else{
+	genome=BSgenome.Mmusculus.UCSC.mm10
+	data("mouse_pwms_v2")
+	motifs=mouse_pwms_v2
+}
 
 
 MyAddMotifs <- function(
@@ -94,7 +106,7 @@ MyAddMotifs <- function(
 }
 
 
-motif.matrix=MyAddMotifs(features,genome=BSgenome.Mmusculus.UCSC.mm10,pfm=mouse_pwms_v2)
+motif.matrix=MyAddMotifs(features,genome=genome,pfm=motifs)
 #chromvar.z <- SummarizedExperiment::assays(dev)[[2]]
 #rownames(x = chromvar.z) <- colnames(x = motif.matrix)
 #obj <- CreateAssayObject(data = chromvar.z)
