@@ -1,4 +1,5 @@
 library(ArchR)
+source("/home/ye/Work/R/scATAC/ArchR/plotter/ArchRHeatmap.R")
 MyplotMarkers <- function(
   seMarker = NULL,
   name = NULL,
@@ -112,5 +113,131 @@ MyplotMarkers <- function(
     stop("plotAs not recognized")
   }
 
+}
+
+computeKNN<-function (data = NULL, query = NULL, k = 50, includeSelf = FALSE,
+    ...)
+{
+    if (is.null(query)) {
+        query <- data
+        searchSelf <- TRUE
+    }
+    else {
+        searchSelf <- FALSE
+    }
+    require("nabor")
+    if (searchSelf & !includeSelf) {
+        knnIdx <- nabor::knn(data = data, query = query, k = k +
+            1, ...)$nn.idx
+        knnIdx <- knnIdx[, -1, drop = FALSE]
+    }
+    else {
+        knnIdx <- nabor::knn(data = data, query = query, k = k,
+            ...)$nn.idx
+    }
+    knnIdx
+}
+
+rowZscores<-function (m = NULL, min = -2, max = 2, limit = FALSE)
+{
+    z <- sweep(m - Matrix::rowMeans(m), 1, matrixStats::rowSds(m), `/`)
+    if (limit) {
+        z[z > max] <- max
+        z[z < min] <- min
+    }
+    return(z)
+}
+
+ArchRDORCPlot<-function(mat,
+			scaleRows=TRUE,
+			limits = c(-1.5, 1.5),
+			rowOrder=NULL,
+			labelTop=50,
+			maxFeatures=nrow(mat),
+			varCutOff=0.25,
+			labelMarkers=NULL,
+			name="DORCHeatmap",...){
+    rSNA <- rowSums(is.na(mat))
+    if (sum(rSNA > 0) > 0) {
+        mat <- mat[rSNA == 0, ]
+    }
+    varQ <- getQuantiles(matrixStats::rowVars(mat))
+    orderedVar <- FALSE
+    if (is.null(rowOrder)) {
+        mat <- mat[order(varQ, decreasing = TRUE), ]
+        orderedVar <- TRUE
+        if (is.null(varCutOff) & is.null(maxFeatures)) {
+            n <- nrow(mat)
+        }
+        else if (is.null(varCutOff)) {
+            n <- maxFeatures
+        }
+        else if (is.null(maxFeatures)) {
+            n <- (1 - varCutOff) * nrow(mat)
+        }
+        else {
+            n <- min((1 - varCutOff) * nrow(mat), maxFeatures)
+        }
+        n <- min(n, nrow(mat))
+        mat <- mat[head(seq_len(nrow(mat)), n), ]
+    }
+    if (!is.null(labelTop)) {
+        if (orderedVar) {
+            idxLabel <- rownames(mat)[seq_len(labelTop)]
+        }
+        else {
+            idxLabel <- rownames(mat)[order(varQ, decreasing = TRUE)][seq_len(labelTop)]
+        }
+    }
+    else {
+        idxLabel <- NULL
+    }
+    if (!is.null(labelMarkers)) {
+        idxLabel2 <- match(tolower(labelMarkers), tolower(rownames(mat)),
+            nomatch = 0)
+        idxLabel2 <- idxLabel2[idxLabel2 > 0]
+    }
+    else {
+        idxLabel2 <- NULL
+    }
+    idxLabel <- c(idxLabel, rownames(mat)[idxLabel2])
+    if (scaleRows) {
+        mat <- sweep(mat - rowMeans(mat), 1, matrixStats::rowSds(mat),
+            `/`)
+        mat[mat > max(limits)] <- max(limits)
+        mat[mat < min(limits)] <- min(limits)
+    }
+    if (nrow(mat) == 0) {
+        stop("No Features Remaining!")
+    }
+    if (!is.null(rowOrder)) {
+        idx <- rowOrder
+    }
+    else {
+        idx <- order(apply(mat, 1, which.max))
+    }
+    #return(mat[idx,])
+    p=ArchRHeatmap(mat = mat[idx, ], scale = FALSE, limits = c(min(mat),
+            max(mat)), clusterCols = TRUE, clusterRows = TRUE,
+            labelRows = FALSE, labelCols = TRUE, customRowLabel = match(idxLabel,
+                rownames(mat[idx, ])), showColDendrogram = TRUE, draw = FALSE,name=name,...)
+    return(p)
+}
+
+ 
+getQuantiles<-function (v = NULL, len = length(v))
+{
+    if (length(v) < len) {
+        v2 <- rep(0, len)
+        v2[seq_along(v)] <- v
+    }
+    else {
+        v2 <- v
+    }
+    p <- trunc(rank(v2))/length(v2)
+    if (length(v) < len) {
+        p <- p[seq_along(v)]
+    }
+    return(p)
 }
 

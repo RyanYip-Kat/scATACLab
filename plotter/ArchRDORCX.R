@@ -4,7 +4,6 @@ library(ggrepel)
 library(stringr)
 library(argparse)
 
-projHeme5=loadArchRProject("../ArchR_Result/CEpi_Mouse/Save-ProjHeme-P2G/")
 
 #########################
 softmax=function(V){
@@ -16,6 +15,22 @@ makedir<-function(path){
         if(!dir.exists(path)){
                 dir.create(path,recursive=TRUE)
         }
+}
+
+MinMaxScale<-function(x){
+        stopifnot(is.vector(x))
+        v=(x-min(x))/(max(x)-min(x)+1e-4)
+        return(v)
+}
+
+rowZscores<-function (m = NULL, min = -2, max = 2, limit = FALSE)
+{
+    z <- sweep(m - Matrix::rowMeans(m), 1, matrixStats::rowSds(m), `/`)
+    if (limit) {
+        z[z > max] <- max
+        z[z < min] <- min
+    }
+    return(z)
 }
 
 
@@ -55,20 +70,22 @@ DOCRPointPlot=function(project,corCutOff=0.45,resolution=1,nShowGenes=10,outDir=
 	ggsave(file.path(outDir,"DORCPointPlot.pdf"),plot=p,width=12,height=12)
 }
 
-getDORCScoreMatrix=function(project,colCellType="Clusters",dorcCutoff=10){
+getDORCXMatrix=function(project,colCellType="Clusters",dorcCutoff=10){
 	#  project : ArchR Object with addPeak2Gene
 	#  colCellType : column in metadata as celltype
 	#  dorcCutoff :  the cutoff value for DORC
 
 	stopifnot(class(project)=="ArchRProject")
 	nFrags=project$nFrags
+	peakset=getPeakSet(project)
 	message("INFO :  get peak matrix ...")
 	peakSE=getMatrixFromProject(project,useMatrix="PeakMatrix")
 	peakCounts=assay(peakSE)  # peakCounts
 	message("INFO : Normalize with unique fragments ...")
-        peakCounts=peakCounts/nFrags
+        peakCounts=peakCounts/nFrags*1e4
 
-	genes=getFeatures(project,useMatrix="GeneIntegrationMatrix")
+	geneMatrix=c("GeneIntegrationMatrix","GeneExpressionMatrix")[c("GeneIntegrationMatrix","GeneExpressionMatrix")%in%getAvailableMatrices(project)]
+	genes=getFeatures(project,useMatrix=geneMatrix)
 	message("INFO : get Peak2Gene Links ...")
         p2g <- getPeak2GeneLinks(
 				 ArchRProj = project,
@@ -86,7 +103,7 @@ getDORCScoreMatrix=function(project,colCellType="Clusters",dorcCutoff=10){
         idxGenesNum=table(idxGenes)
         idxGenesNum=idxGenesNum[order(idxGenesNum,decreasing=F)]
         df=data.frame("N"=as.integer(idxGenesNum),"R"=rank(idxGenesNum,ties.method="first"),"G"=names(idxGenesNum))
-        df$genes=genes[df$G]
+        df$genes=genes[as.integer(df$G)]
 
 	message("INFO : get DORC SCORE Matrix ...")
 	dorcDF_list=list()
@@ -116,17 +133,47 @@ getDORCScoreMatrix=function(project,colCellType="Clusters",dorcCutoff=10){
 		cat(sprintf("INFO : [ %s(%d) of %d ]\n",celltype,i,length(uCellType)))
 		cell=Cells[CellType==celltype]
 		cellMat=as.matrix(dorcDF[cell,])
-		cellMatDF=data.frame("SCORE"=colSums(cellMat)) # nGene x 1
+		cellMatDF=data.frame("SCORE"=colMeans(cellMat)) # nGene x 1
 		#cellMatDF=as.data.frame(apply(cellMatDF,2,softmax))
 		colnames(cellMatDF)=celltype
 		celltypeDorcDF_list[[i]]=cellMatDF
 	}
 	celltypeDorcDF=do.call(cbind,celltypeDorcDF_list)
-	return(list("CellDORC"=dorcDF,"CellTypeDORC"=celltypeDorcDF))
+	return(list("cellDORC"=dorcDF,"groupDORC"=celltypeDorcDF))
 }
 	
+computeDORCKNN<-function (data,
+			  k = 50,
+			  knnIteration=500, 
+			  includeSelf = FALSE,
+			  overlapCutoff=0.8,
+    ...)
+{
+    idx <- sample(seq_len(nrow(data)), knnIteration, replace = !nrow(data) >= knnIteration)
+    query <- data[idx,]
+    searchSelf <- FALSE
 
-#dorcList=getDORCScoreMatrix(projHeme5)
+    require("nabor")
+    if (searchSelf & !includeSelf) {
+        knnIdx <- nabor::knn(data = data, query = query, k = k +
+            1, ...)$nn.idx
+        knnIdx <- knnIdx[, -1, drop = FALSE]
+    }
+    else {
+        knnIdx <- nabor::knn(data = data, query = query, k = k,
+            ...)$nn.idx
+    }
+    keepKnn <- ArchR:::determineOverlapCpp(knnIdx, floor(overlapCutoff * k))
+    knnIdx <- knnIdx[keepKnn==0,]
+    knnObj <- lapply(seq_len(nrow(knnIdx)), function(x){
+    rownames(data)[knnIdx[x, ]]}) %>% SimpleList
+    return(knnObj)
+}
+
+
+
+#projHeme=loadArchRProject("../multiome-atac-gex-test/Save-ProjHeme-P2G/")
+#dorcList=getDORCXMatrix(projHeme)
 #saveRDS(dorcList,"DORCScoreList.rds")
 
 #x=dorcList[["CellTypeDORC"]]
