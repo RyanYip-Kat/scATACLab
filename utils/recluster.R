@@ -18,6 +18,10 @@ parser$add_argument("--outdir",
                     type="character",
                     default="ArchR_result")
 
+parser$add_argument("--groupby",
+		    type="character",
+		    default="Sample",
+		    help="column for harmony")
 
 parser$add_argument("--genome",
                     type="character",
@@ -74,7 +78,7 @@ if(args$harmony){
 			       ArchRProj = projHeme,
 			       reducedDims = "IterativeLSI",
                                name = "Harmony",
-                               groupBy = "Sample",
+                               groupBy = args$groupby,
 			       force=TRUE)
 }
 
@@ -122,4 +126,4 @@ pheatmap(
 dev.off()
 
 print("# Save ...")
-saveArchRProject(ArchRProj = projHeme, outputDirectory =file.path(args$outdir,"Save-ProjHeme"), load = TRUE)
+saveArchRProject(ArchRProj = projHeme, outputDirectory =file.path(args$outdir,"Save-ProjHeme-Clusters"), load = TRUE)
