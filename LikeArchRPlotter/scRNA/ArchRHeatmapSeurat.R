@@ -26,7 +26,8 @@ if(length(rm.genes)>0){
 
 
 ################  reorder cells
-groups=unique(Idents(seurat))
+#groups=unique(Idents(seurat))
+groups=levels(seurat)
 cellSets=unlist(lapply(groups,function(x)return(WhichCells(seurat,idents=x))))
 colData=metaData[cellSets,groupBy,drop=FALSE]
 m=mat[genes,cellSets]
