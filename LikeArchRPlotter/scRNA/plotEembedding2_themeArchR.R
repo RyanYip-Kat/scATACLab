@@ -4,6 +4,8 @@ library(ggplot2)
 library(stringr)
 
 source("/home/ye/Work/R/scATAC/ArchR/plotter/plotDF.R")
+source("/home/ye/Work/R/scATAC/Signac/plotter/SeuratImputeWeight.R")
+
 tolower<-str_to_lower
 quantileCut<-function (x = NULL, lo = 0.025, hi = 0.975, maxIf0 = TRUE)
 {
@@ -40,6 +42,7 @@ MyplotEmbedding <- function(
   embedding = "UMAP",
   colorBy = "metadata", # column in metadata or genes in matrixs
   name = "Sample",
+  imputeWeights=NULL,
   pal = NULL,
   size = 0.1,
   sampleCells = NULL,
@@ -130,6 +133,14 @@ MyplotEmbedding <- function(
     }
 
     colorMat <- colorMat[,rownames(df), drop=FALSE]
+    if(!is.null(imputeWeights)){
+      message("Imputing Matrix")
+      colorMat <- MyimputeMatrix(mat = colorMat, imputeWeights = imputeWeights)
+      if(!inherits(colorMat, "matrix")){
+        colorMat <- matrix(colorMat, ncol = nrow(df))
+        colnames(colorMat) <- rownames(df)
+      }
+    }
     colorList <- lapply(seq_len(nrow(colorMat)), function(x){
       colorParams <- list()
       colorParams$color <- colorMat[x, ]
@@ -237,6 +248,7 @@ MyPlot<-function(seurat,
 		 features,
 		 embedding,
 		 outDir,
+		 imputeWeights=NULL,
 		 splitBy=NULL,
 		 combine=FALSE){
 	if(!is.null(splitBy)){
@@ -254,6 +266,7 @@ MyPlot<-function(seurat,
 						  assay=assay,
 						  embedding=embedding,
                                                   name=feature,
+						  imputeWeights=imputeWeights,
                                                   colorBy=colorBy)+ggtitle(paste0(i,"-",feature))
 				rm(sr)
 				return(p)
@@ -351,6 +364,17 @@ if(!is.null(args$column) & !is.null(args$subset)){
         seurat<-subset(seurat,idents=args$subset)
 }
 
+if(args$colorBy=="matrix"){
+	message("INFO : Impute Weights")
+        impWeights=ImputeWeights(seurat,
+			 reducedDims="pca",
+			 sampleCells=10000,
+			 nRep = 2,
+			 threads=8)
+}else{
+	impWeights=NULL
+}
+
 #DF=read.csv(args$name,stringsAsFactors=F,sep=",",header=F)
 #features=as.character(DF$V1)
 features=args$name
@@ -359,6 +383,7 @@ MyPlot(seurat=seurat,
        assay=args$assay,
        splitBy=args$splitBy,
        embedding=args$embed,
+       imputeWeights=impWeights,
        features=features,
        colorBy=args$colorBy,
        outDir=outDir,
