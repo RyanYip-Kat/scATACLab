@@ -12,11 +12,11 @@ featureName <- function(gr){
 
 
 
-diffObj=readRDS("tf2target/degs-geneIntegraMatrix-hcbd-cdc.rds")
+diffObj=readRDS("tf2target/degs-geneIntegraMatrix-hcbd-cdc.rds")  # get from getFeatureMarkers with useMatrix="GeneScoreMatrix" or  "GeneIntegraMatrix" in ArchR
 rownames(diffObj)=rowData(diffObj)$name
-diffATAC=readRDS("tf2target/degs-markerTest-hcbd-cdc.rds")
-p2gLinks=readRDS("tf2target/Save_HCBD_P2G_Links.rds")$linksSig
-matches=readRDS("tf2target/Matches.rds")
+diffATAC=readRDS("tf2target/degs-markerTest-hcbd-cdc.rds") # get from getFeatureMarkers with useMatrix="PeakMatrix" in ArchR
+p2gLinks=readRDS("tf2target/Save_HCBD_P2G_Links.rds")$linksSig   # get from Peak2Link in ArchR
+matches=readRDS("tf2target/Matches.rds")  # get from getMatches in ArchR
 
 ################################
 
